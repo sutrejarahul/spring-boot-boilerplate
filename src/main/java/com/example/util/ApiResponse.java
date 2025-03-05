@@ -10,8 +10,13 @@ public record ApiResponse<T>(
         int status,
         T data
 ) {
+    public ApiResponse(boolean success, String message, String type, String description, HttpStatus status, T data) {
+        this(success, message, type, description, status.value(), data);
+    }
+
+    // Constructor Overload for Default Type "RESPONSE"
     public ApiResponse(boolean success, String message, String description, HttpStatus status, T data) {
-        this(success, message, "RESPONSE", description, status.value(), data);
+        this(success, message, "RESPONSE", description, status, data);
     }
 }
 
